@@ -1,0 +1,22 @@
+{
+  "version": "398dc7e38b70",
+  "files": {
+    "desktop": "desktop-398dc7e38b70.bin.gz",
+    "mobile": "mobile-398dc7e38b70.bin.gz",
+    "environment": "environment-398dc7e38b70.bin.gz"
+  },
+  "sizes": {
+    "desktop": {
+      "raw": 2638509,
+      "compressed": 685800
+    },
+    "mobile": {
+      "raw": 440367,
+      "compressed": 101368
+    },
+    "environment": {
+      "raw": 4194412,
+      "compressed": 636041
+    }
+  }
+}

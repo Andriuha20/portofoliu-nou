@@ -1,0 +1,33 @@
+/* Header geometry is identical to the previous mark. Only orbit/star animate. */
+.logo-a { display: block; width: 52px; height: 44px; overflow: visible; color: #080a10; }
+[data-theme="dark"] .logo-a { color: #fff; }
+.brand:focus-visible { outline: 2px solid var(--accent); outline-offset: 5px; border-radius: 4px; }
+.brand-orbit {
+  transform-box: view-box;
+  transform-origin: 50% 54.464%;
+  transition: transform 700ms cubic-bezier(.2,.75,.25,1);
+}
+.brand-orbit-glow { opacity: .28; transition: opacity 700ms ease; }
+.brand-star { transform-box: view-box; transform-origin: 81.25% 16.071%; transition: transform 700ms cubic-bezier(.2,.75,.25,1); }
+.brand-star-glow { opacity: .35; transition: opacity 700ms ease; }
+[data-theme="dark"] .brand-orbit-glow { opacity: .52; }
+[data-theme="dark"] .brand-star-glow { opacity: .6; }
+.brand:focus-visible .brand-orbit { transform: rotate(4deg) scaleY(1.045); }
+.brand:focus-visible .brand-orbit-glow { opacity: .82; }
+.brand:focus-visible .brand-star { transform: scale(1.08); }
+.brand:focus-visible .brand-star-glow { opacity: .95; }
+@media (hover: hover) {
+  .brand:hover .brand-orbit { transform: rotate(4deg) scaleY(1.045); }
+  .brand:hover .brand-orbit-glow { opacity: .82; }
+  .brand:hover .brand-star { transform: scale(1.08); }
+  .brand:hover .brand-star-glow { opacity: .95; }
+  .brand:hover .brand-star-core { animation: brand-star-twinkle 900ms ease-in-out 1; }
+}
+@keyframes brand-star-twinkle { 0%, 100% { opacity: 1; } 40% { opacity: .75; } 72% { opacity: 1; } }
+@media (max-width: 700px) { .logo-a { width: 43px; height: 38px; } }
+@media (prefers-reduced-motion: reduce) {
+  .brand-orbit, .brand-star, .brand-orbit-glow, .brand-star-glow { transition: none; }
+  .brand:is(:hover, :focus-visible) .brand-orbit,
+  .brand:is(:hover, :focus-visible) .brand-star { transform: none; }
+  .brand:hover .brand-star-core { animation: none; }
+}

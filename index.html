@@ -1,13 +1,330 @@
 <!doctype html>
-<html lang="en">
+<html lang="ro" data-theme="light">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <script>
+      try {
+        var t = localStorage.getItem('tema');
+        if (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) t = 'dark';
+        document.documentElement.setAttribute('data-theme', t || 'light');
+      } catch (e) {}
+    </script>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/style.css" />
+    <noscript>
+      <style>
+        .reveal { opacity: 1 !important; transform: none !important; }
+        .menu-overlay { display: none !important; }
+      </style>
+    </noscript>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>portofoliu-nou</title>
+    <meta
+      name="description"
+      content="Portofoliul lui Țîgîrlaș Andrei, student UTM care învață vibe coding: proiecte, despre mine și contact."
+    />
+    <meta name="theme-color" content="#FAFAF8" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="ro_RO" />
+    <meta property="og:title" content="Țîgîrlaș Andrei — Portofoliu" />
+    <meta
+      property="og:description"
+      content="Portofoliul lui Țîgîrlaș Andrei, student UTM care învață vibe coding: proiecte, despre mine și contact."
+    />
+    <meta name="twitter:card" content="summary" />
+    <title>Țîgîrlaș Andrei — Portofoliu</title>
   </head>
   <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <a class="skip-link" href="#continut">Sari la conținut</a>
+
+    <!-- Strat global neon: JS mută aici bloburile din secțiuni și le poziționează
+         în coordonate de document. Fără JS, câmpurile rămân în secțiuni. -->
+    <div class="neon-camp" id="neon-global" aria-hidden="true"></div>
+
+    <header class="site-header">
+      <div class="header-bar">
+        <a class="brand" href="#hero" aria-label="Acasă — Țîgîrlaș Andrei">
+          <svg class="logo-a" width="52" height="44" viewBox="0 0 128 112" fill="none" aria-hidden="true" focusable="false">
+            <defs>
+              <linearGradient id="brandOrbit" x1="8" y1="80" x2="120" y2="42" gradientUnits="userSpaceOnUse"><stop stop-color="#365dff"/><stop offset=".35" stop-color="#398fff"/><stop offset=".68" stop-color="#8450ff"/><stop offset="1" stop-color="#b394ff"/></linearGradient>
+              <radialGradient id="brandStar"><stop stop-color="#fff"/><stop offset=".4" stop-color="#e0d8ff"/><stop offset="1" stop-color="#7654ff"/></radialGradient>
+              <filter id="brandBloom" x="-50%" y="-100%" width="200%" height="300%" color-interpolation-filters="sRGB"><feGaussianBlur stdDeviation="2.2"/></filter>
+            </defs>
+            <g class="brand-orbit brand-orbit-back"><g transform="rotate(-26 64 61)" stroke="url(#brandOrbit)" stroke-linecap="round">
+              <path class="brand-orbit-glow" d="M8 61C8 50.5 33.1 42 64 42S120 50.5 120 61" stroke-width="8" filter="url(#brandBloom)"/>
+              <path d="M8 61C8 50.5 33.1 42 64 42S120 50.5 120 61" stroke-width="3.2"/>
+            </g></g>
+            <path class="brand-a-letter" fill="currentColor" fill-rule="evenodd" d="M48 16H73L104 98H81L75 80H45L39 98H16ZM51 62H69L60 35Z"/>
+            <g class="brand-orbit brand-orbit-front"><g transform="rotate(-26 64 61)" stroke-linecap="round">
+              <path class="brand-orbit-glow" d="M120 61C120 71.5 94.9 80 64 80S8 71.5 8 61" stroke="url(#brandOrbit)" stroke-width="9" filter="url(#brandBloom)"/>
+              <path d="M120 61C120 71.5 94.9 80 64 80S8 71.5 8 61" stroke="url(#brandOrbit)" stroke-width="4.2"/>
+              <path d="M111 71.3C100.7 76.6 83.4 80 64 80C43 80 24.7 76.1 15 70.3" stroke="#d6dcff" stroke-width=".9" opacity=".65"/>
+            </g></g>
+            <g class="brand-star">
+              <path class="brand-star-glow" d="M104 7C105.4 14.3 107.7 16.6 115 18C107.7 19.4 105.4 21.7 104 29C102.6 21.7 100.3 19.4 93 18C100.3 16.6 102.6 14.3 104 7Z" fill="#8b62ff" filter="url(#brandBloom)"/>
+              <path class="brand-star-core" d="M104 7C105.4 14.3 107.7 16.6 115 18C107.7 19.4 105.4 21.7 104 29C102.6 21.7 100.3 19.4 93 18C100.3 16.6 102.6 14.3 104 7Z" fill="url(#brandStar)"/>
+            </g>
+          </svg>
+        </a>
+        <p class="header-meta">Portofoliu — Student UTM</p>
+        <div class="header-actions">
+          <button
+            id="tema-toggle"
+            class="icon-btn"
+            type="button"
+            aria-label="Comută la tema dark"
+          >
+            <svg class="icon icon-soare" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.2" />
+              <path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3L19 19M19 5l-1.7 1.7M6.7 17.3L5 19" />
+            </svg>
+            <svg class="icon icon-luna" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20 13.5A8 8 0 0 1 10.5 4 8 8 0 1 0 20 13.5Z" />
+            </svg>
+          </button>
+          <button
+            id="meniu-btn"
+            class="menu-btn"
+            type="button"
+            aria-expanded="false"
+            aria-controls="meniu-overlay"
+          >
+            <span class="menu-btn-text">meniu</span>
+            <span class="menu-btn-lines" aria-hidden="true"><span></span><span></span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <div id="meniu-overlay" class="menu-overlay" hidden>
+      <nav aria-label="Navigație principală">
+        <ul class="menu-list">
+          <li><a href="#hero"><span class="menu-index">01</span>Acasă</a></li>
+          <li><a href="#proiecte"><span class="menu-index">02</span>Proiecte</a></li>
+          <li><a href="#despre"><span class="menu-index">03</span>Despre</a></li>
+          <li><a href="#unelte"><span class="menu-index">04</span>Unelte</a></li>
+          <li><a href="#faq"><span class="menu-index">05</span>Întrebări</a></li>
+          <li><a href="#contact"><span class="menu-index">06</span>Contact</a></li>
+        </ul>
+      </nav>
+      <button id="tema-meniu" class="menu-tema" type="button" aria-label="Treci la tema dark">
+        <svg class="icon icon-soare" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4.2" />
+          <path d="M12 2.5v2.4M12 19.1v2.4M2.5 12h2.4M19.1 12h2.4M5 5l1.7 1.7M17.3 17.3L19 19M19 5l-1.7 1.7M6.7 17.3L5 19" />
+        </svg>
+        <svg class="icon icon-luna" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M20 13.5A8 8 0 0 1 10.5 4 8 8 0 1 0 20 13.5Z" />
+        </svg>
+        <span class="menu-tema-text">Treci la tema dark</span>
+      </button>
+      <div class="menu-calitate" role="group" aria-label="Calitate grafică">
+        <span class="menu-calitate-eticheta" aria-hidden="true">Calitate</span>
+        <div class="menu-calitate-optiuni">
+          <button type="button" data-calitate="auto">Auto</button>
+          <button type="button" data-calitate="high">Ridicată</button>
+          <button type="button" data-calitate="balanced">Echilibrată</button>
+          <button type="button" data-calitate="low">Redusă</button>
+        </div>
+      </div>
+      <div class="menu-foot">
+        <a href="mailto:andriuha020@gmail.com">andriuha020@gmail.com</a>
+        <a href="https://github.com/Andriuha20" target="_blank" rel="noopener">GitHub ↗</a>
+      </div>
+    </div>
+
+    <main id="continut">
+      <!-- HERO · EDITABIL: numele (h1), specializarea (.hero-sub), CTA-urile (.hero-cta) -->
+      <section id="hero" class="hero" aria-labelledby="titlu-hero">
+        <div class="neon-camp" id="neon-camp" aria-hidden="true"></div>
+        <div class="hero-inner">
+          <p class="hero-eyebrow"><span class="hero-eyebrow-mark" aria-hidden="true"></span>Student developer&nbsp;&nbsp;/&nbsp;&nbsp;Building &amp; learning</p>
+          <h1 id="titlu-hero" class="hero-title">
+            <span class="line">ȚÎGÎRLAȘ</span>
+            <span class="line">ANDREI<span class="punct">.</span></span>
+          </h1>
+          <div class="hero-row">
+            <p class="hero-sub">Student UTM, anul I. Învăț să construiesc pentru web, câte un proiect pe rând.</p>
+            <div class="hero-cta">
+              <a class="btn-primar" href="#contact">Scrie-mi</a>
+              <a class="btn-link" href="#proiecte">Vezi proiecte<span aria-hidden="true"> ↓</span></a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- MANIFEST · EDITABIL: textul mare (.manifest-text) + paragraful concret (.manifest-small) -->
+      <section class="manifest" aria-label="Manifest">
+        <div class="neon-camp" aria-hidden="true">
+        </div>
+        <div class="wrap">
+          <p class="manifest-text reveal">Majoritatea memorează sintaxă.<br />Eu prefer <em>ideile care merg</em>.</p>
+          <p class="manifest-small reveal">
+            Sunt student în anul 1 la UTM și construiesc pagini statice cu HTML, CSS și Vite,
+            publicate pe Vercel. Aduc muncă constantă, proces deschis pe GitHub și
+            disponibilitatea de a învăța ce cere proiectul.
+          </p>
+        </div>
+      </section>
+
+      <!-- PROIECTE · EDITABIL: copiază un <li class="proiect">, schimbă meta/nume/descriere/link.
+           ordinea: textul (.proiect-text) + scena obiectului (.proiect-scena, clasele scena-*). -->
+      <section id="proiecte" class="proiecte" aria-labelledby="titlu-proiecte">
+        <div class="neon-camp" aria-hidden="true">
+        </div>
+        <div class="wrap">
+          <div class="section-head reveal">
+            <h2 id="titlu-proiecte" class="section-title">Proiecte</h2>
+            <p class="section-note">Brandurile bune comunică.<br />Cele mari surprind.</p>
+          </div>
+          <ol class="lista-proiecte">
+            <li class="proiect proiect-mare reveal">
+              <a class="proiect-link" href="https://github.com/Andriuha20/portofoliu" target="_blank" rel="noopener">
+                <span class="proiect-text">
+                  <span class="proiect-meta"><span>01</span><span>Site personal — 2026</span></span>
+                  <span class="proiect-nume">Portofoliul meu</span>
+                  <span class="proiect-desc">Primul meu site real: pagină statică cu Vite vanilla, 5 secțiuni despre mine, publicată pe Vercel.</span>
+                  <span class="proiect-explore">explorează ↗</span>
+                </span>
+                <span class="proiect-scena scena-unu" aria-hidden="true">
+                  <span class="glass-project"></span>
+                </span>
+              </a>
+            </li>
+            <li class="proiect proiect-mic reveal">
+              <a class="proiect-link" href="https://github.com/Andriuha20?tab=repositories" target="_blank" rel="noopener">
+                <span class="proiect-text">
+                  <span class="proiect-meta"><span>02</span><span>Exercițiu · planificat — 2026</span></span>
+                  <span class="proiect-nume">Exercițiu continuu</span>
+                  <span class="proiect-desc">Mini-proiectul prin care exersez HTML, CSS și Git. Îl planific acum, îl public aici când e gata.</span>
+                  <span class="proiect-explore">vezi progresul ↗</span>
+                </span>
+                <span class="proiect-scena scena-doi" aria-hidden="true">
+                  <span class="glass-project"></span>
+                </span>
+              </a>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- MARQUEE -->
+      <div class="marquee" aria-hidden="true">
+        <div class="marquee-track">
+          <span>sunt andrei — învăț vibe coding — sunt andrei — învăț vibe coding —&nbsp;</span>
+          <span>sunt andrei — învăț vibe coding — sunt andrei — învăț vibe coding —&nbsp;</span>
+        </div>
+      </div>
+
+      <!-- DESPRE · EDITABIL: cele două paragrafe din .despre-grid. Fără poză relevantă momentan. -->
+      <section id="despre" class="despre" aria-labelledby="titlu-despre">
+        <div class="neon-camp" aria-hidden="true">
+        </div>
+        <div class="wrap">
+          <div class="section-head reveal">
+            <h2 id="titlu-despre" class="section-title">Despre</h2>
+          </div>
+          <p class="despre-mare reveal">Formele urmează curiozitatea.</p>
+          <div class="despre-grid">
+            <p class="reveal">
+              Sunt student în anul 1 la UTM. Vreau să mă pun pe picioare și să-mi schimb viața
+              învățând vibe coding, ca să obțin un job care îmi poate schimba viitorul.
+            </p>
+            <p class="reveal">
+              Sunt o persoană mai leneșă, dar când e vorba de ceva serios nu stau în pat.
+              Lucrez deschis, pe GitHub, și învăț în public.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- UNELTE · EDITABIL: câte un <li> pe rând (index / nume / meta). Păstrează doar ce-ai folosit real. -->
+      <section id="unelte" class="unelte" aria-labelledby="titlu-unelte">
+        <div class="neon-camp" aria-hidden="true">
+        </div>
+        <div class="wrap">
+          <div class="section-head reveal">
+            <h2 id="titlu-unelte" class="section-title">Unelte</h2>
+            <p class="section-note">Doar ce-am folosit cu adevărat.</p>
+          </div>
+          <ul class="linii-unelte">
+            <li class="reveal"><span class="unelta-index">01</span><span class="unelta-nume">HTML</span><span class="unelta-meta">limbaj</span></li>
+            <li class="reveal"><span class="unelta-index">02</span><span class="unelta-nume">CSS</span><span class="unelta-meta">limbaj</span></li>
+            <li class="reveal"><span class="unelta-index">03</span><span class="unelta-nume">Git</span><span class="unelta-meta">versionare</span></li>
+            <li class="reveal"><span class="unelta-index">04</span><span class="unelta-nume">GitHub</span><span class="unelta-meta">publicare</span></li>
+            <li class="reveal"><span class="unelta-index">05</span><span class="unelta-nume">VS Code</span><span class="unelta-meta">editor</span></li>
+            <li class="reveal"><span class="unelta-index">06</span><span class="unelta-nume">OpenCode</span><span class="unelta-meta">asistent</span></li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- FAQ · EDITABIL: câte un <details> pe întrebare. Șterge tot <section>-ul dacă n-ai întrebări. -->
+      <section class="faq" id="faq" aria-labelledby="titlu-faq">
+        <div class="neon-camp" aria-hidden="true">
+        </div>
+        <div class="wrap">
+          <div class="section-head reveal">
+            <h2 id="titlu-faq" class="section-title">Întrebări</h2>
+          </div>
+          <details class="reveal">
+            <summary>Ce faci acum?</summary>
+            <p>Învăț bazele web-ului — HTML, CSS, Git — și construiesc proiecte mici, publice, pe GitHub.</p>
+          </details>
+          <details class="reveal">
+            <summary>Ce cauți?</summary>
+            <p>Un drum spre un prim job în web: fundație solidă, portofoliu curat, muncă constantă.</p>
+          </details>
+          <details class="reveal">
+            <summary>Cum colaborăm?</summary>
+            <p>Scrie-mi pe email cu ideea ta. Răspund repede și spun sincer dacă pot sau nu s-o fac.</p>
+          </details>
+        </div>
+      </section>
+
+      <!-- CONTACT · EDITABIL: titlul (.contact-title), emailul (mailto:) și lista de linkuri reale. -->
+      <section id="contact" class="contact" aria-labelledby="titlu-contact">
+        <div class="neon-camp" aria-hidden="true">
+        </div>
+        <div class="wrap">
+          <h2 id="titlu-contact" class="contact-title reveal">Hai să începem de la <em>nimic</em>.</h2>
+          <div class="contact-row reveal">
+            <a class="contact-pill contact-pill-primary" data-contact-email data-compose-email href="mailto:andriuha020@gmail.com">
+              <svg class="contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></svg>
+              <span>andriuha020@gmail.com</span>
+              <span class="contact-arrow" aria-hidden="true">↗</span>
+            </a>
+            <ul class="contact-lista">
+              <li><a class="contact-pill" href="https://github.com/Andriuha20" target="_blank" rel="noopener noreferrer" aria-label="GitHub — Andriuha20 (filă nouă)">
+                <svg class="contact-icon" viewBox="0 0 98 96" fill="currentColor" aria-hidden="true" focusable="false"><path d="M41.4395 69.3848C28.8066 67.8535 19.9062 58.7617 19.9062 46.9902C19.9062 42.2051 21.6289 37.0371 24.5 33.5918C23.2559 30.4336 23.4473 23.7344 24.8828 20.959C28.7109 20.4805 33.8789 22.4902 36.9414 25.2656C40.5781 24.1172 44.4062 23.543 49.0957 23.543C53.7852 23.543 57.6133 24.1172 61.0586 25.1699C64.0254 22.4902 69.2891 20.4805 73.1172 20.959C74.457 23.543 74.6484 30.2422 73.4043 33.4961C76.4668 37.1328 78.0937 42.0137 78.0937 46.9902C78.0937 58.7617 69.1934 67.6621 56.3691 69.2891C59.623 71.3945 61.8242 75.9883 61.8242 81.252L61.8242 91.2051C61.8242 94.0762 64.2168 95.7031 67.0879 94.5547C84.4102 87.9512 98 70.6289 98 49.1914C98 22.1074 75.9883 6.69539e-07 48.9043 4.309e-07C21.8203 1.92261e-07 -1.9479e-07 22.1074 -4.3343e-07 49.1914C-6.20631e-07 70.4375 13.4941 88.0469 31.6777 94.6504C34.2617 95.6074 36.75 93.8848 36.75 91.3008L36.75 83.6445C35.4102 84.2188 33.6875 84.6016 32.1562 84.6016C25.8398 84.6016 22.1074 81.1563 19.4277 74.7441C18.375 72.1602 17.2266 70.6289 15.0254 70.3418C13.877 70.2461 13.4941 69.7676 13.4941 69.1934C13.4941 68.0449 15.4082 67.1836 17.3223 67.1836C20.0977 67.1836 22.4902 68.9063 24.9785 72.4473C26.8926 75.2227 28.9023 76.4668 31.2949 76.4668C33.6875 76.4668 35.2187 75.6055 37.4199 73.4043C39.0469 71.7773 40.291 70.3418 41.4395 69.3848Z"/></svg>
+                <span>GitHub</span><span class="contact-arrow" aria-hidden="true">↗</span>
+              </a></li>
+              <li><button class="contact-pill" data-copy-discord type="button" disabled aria-label="Copiază username-ul Discord andriuha7743">
+                <svg class="contact-icon contact-icon-discord" viewBox="0 0 64 48" fill="currentColor" aria-hidden="true" focusable="false"><path d="M40.575 0C39.9562 1.09866 39.4006 2.2352 38.8954 3.397C34.0967 2.67719 29.2096 2.67719 24.3982 3.397C23.9057 2.2352 23.3374 1.09866 22.7186 0C18.2104 0.770324 13.8157 2.12155 9.64839 4.02841C1.38951 16.2652 -0.845688 28.1863 0.265599 39.9432C5.10222 43.517 10.5197 46.2447 16.2909 47.9874C17.5916 46.2447 18.7407 44.3883 19.7257 42.4562C17.8568 41.7616 16.0509 40.8903 14.3208 39.88C14.7755 39.5517 15.2175 39.2107 15.6468 38.8824C25.7873 43.6559 37.5316 43.6559 47.6847 38.8824C48.1141 39.236 48.5561 39.577 49.0107 39.88C47.2806 40.9029 45.4748 41.7616 43.5931 42.4688C44.5781 44.4009 45.7273 46.2573 47.028 48C52.7991 46.2573 58.2167 43.5422 63.0533 39.9684C64.3666 26.3299 60.8055 14.5099 53.6452 4.04104C49.4905 2.13418 45.0959 0.782952 40.5876 0.0252565L40.575 0ZM21.1401 32.7072C18.0209 32.7072 15.4321 29.8785 15.4321 26.3804C15.4321 22.8824 17.9199 20.041 21.1275 20.041C24.3351 20.041 26.886 22.895 26.8354 26.3804C26.7849 29.8658 24.3224 32.7072 21.1401 32.7072ZM42.1788 32.7072C39.047 32.7072 36.4834 29.8785 36.4834 26.3804C36.4834 22.8824 38.9712 20.041 42.1788 20.041C45.3864 20.041 47.9246 22.895 47.8741 26.3804C47.8236 29.8658 45.3611 32.7072 42.1788 32.7072Z"/></svg>
+                <span data-discord-username>andriuha7743</span>
+                <svg class="contact-icon contact-icon-copy" data-icon-copy viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+                <svg class="contact-icon contact-icon-check" data-icon-check viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><polyline points="20 6 9 17 4 12"/></svg>
+              </button></li>
+            </ul>
+          </div>
+          <p id="contact-status" class="contact-status" role="status" aria-live="polite" aria-atomic="true"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="neon-camp" aria-hidden="true">
+      </div>
+      <div class="wrap footer-grid">
+        <p>© <span id="an">2026</span> Țîgîrlaș Andrei — Chișinău, MD</p>
+        <a href="#hero" class="footer-top">Sus ↑</a>
+      </div>
+    </footer>
+
+    <script type="module" src="./src/main.js"></script>
+    <script type="module" src="./src/contact-actions.js"></script>
   </body>
 </html>
