@@ -1,0 +1,104 @@
+/* Blob Lab — stiluri izolate, prefixate .lab. Nu atinge portofoliul. */
+:root {
+  --lab-fundal-deschis: #fafaf8;
+  --lab-fundal-inchis: #06070c;
+  --lab-cerneala-deschis: #0a0a0b;
+  --lab-cerneala-inchis: #f4f4f1;
+  --lab-accent: #2547ff;
+}
+:root[data-fundal="intunecat"] {
+  color-scheme: dark;
+}
+html[data-fundal="intunecat"] body.lab {
+  background: var(--lab-fundal-inchis);
+  color: var(--lab-cerneala-inchis);
+}
+body.lab {
+  margin: 0;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  font-family: "Archivo", system-ui, "Segoe UI", Arial, sans-serif;
+  background: var(--lab-fundal-deschis);
+  color: var(--lab-cerneala-deschis);
+  -webkit-font-smoothing: antialiased;
+}
+.lab-sus {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 28px 24px 0;
+}
+.lab-sus h1 {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.lab-sus p {
+  margin: 4px 0 0;
+  opacity: 0.65;
+  font-size: 0.9rem;
+}
+.lab-sus a { color: inherit; }
+.lab-scena {
+  position: relative;
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  min-height: min(72vh, 720px);
+  box-sizing: border-box;
+}
+#scena {
+  display: block;
+  width: 100%;
+  height: min(72vh, 720px);
+}
+.lab-stare {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 34ch;
+  text-align: center;
+  border: 1px solid currentColor;
+  border-radius: 12px;
+  padding: 16px 20px;
+}
+.lab-stare[hidden] { display: none; }
+.lab-controale {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 24px 40px;
+  box-sizing: border-box;
+}
+.lab-controale button {
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.9rem;
+  min-height: 44px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.lab-controale button:hover { border-color: var(--lab-accent); color: var(--lab-accent); }
+.lab-controale button:disabled { opacity: 0.5; cursor: default; }
+@media (max-width: 560px) {
+  .lab-sus { flex-direction: column; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lab-controale button { transition: none; }
+}

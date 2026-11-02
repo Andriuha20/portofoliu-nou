@@ -1,0 +1,245 @@
+/* ————————————————————————————————
+   IntroExperience — poarta holografică de intrare.
+   Overlay fullscreen cu O singură bulă lichidă, textul
+   „APASĂ BULA PENTRU A INTRA", ruptură procedurală a membranei
+   la atingere + reveal radial spre portofoliu.
+   Izolat: nu atinge Hero, bule.js sau shaderele portofoliului.
+   ———————————————————————————————— */
+
+.intro-overlay {
+  --intro-bg: #fafaf8;
+  --intro-ink: #0a0a0b;
+  --intro-muted: #5f5f66;
+  --intro-accent: #2547ff;
+  --intro-r: 160px; /* raza bulei — setată din JS, responsive */
+  position: fixed;
+  inset: 0;
+  z-index: 300; /* deasupra navigației (100) și modalului (200): poartă temporară */
+  display: grid;
+  place-items: center;
+  overflow: clip;
+  background: var(--intro-bg);
+  animation: intro-aparitie 450ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  touch-action: manipulation;
+}
+
+[data-theme="dark"] .intro-overlay {
+  --intro-bg: #0a0a0c;
+  --intro-ink: #f4f4f1;
+  --intro-muted: #b6b6bf;
+  --intro-accent: #7b93ff;
+}
+
+/* Fundalul vine din tema paginii când variabilele globale există. */
+.intro-overlay {
+  background: var(--bg, var(--intro-bg));
+  color: var(--ink, var(--intro-ink));
+}
+
+@keyframes intro-aparitie {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.intro-vh {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* Halou moale în spatele bulei — ieftin (gradient CSS), sensibil la temă. */
+.intro-glow {
+  position: absolute;
+  left: 50%;
+  top: 46%;
+  width: calc(var(--intro-r) * 3.2);
+  height: calc(var(--intro-r) * 3.2);
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  pointer-events: none;
+  background:
+    radial-gradient(circle, rgba(20, 91, 255, 0.14) 0%, rgba(255, 54, 232, 0.1) 38%, transparent 68%);
+  animation: intro-respiră 4.5s ease-in-out infinite alternate;
+}
+
+[data-theme="dark"] .intro-glow {
+  background:
+    radial-gradient(circle, rgba(20, 91, 255, 0.24) 0%, rgba(255, 54, 232, 0.16) 38%, transparent 68%);
+}
+
+@keyframes intro-respiră {
+  from { transform: translate(-50%, -50%) scale(1); opacity: 0.85; }
+  to { transform: translate(-50%, -50%) scale(1.07); opacity: 1; }
+}
+
+.intro-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: default;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.intro-canvas.intro-poate-apăsa { cursor: pointer; }
+
+/* Legendă-buton sub bulă: accesibilă cu mouse/touch/tastatură. */
+.intro-cta {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + var(--intro-r) + 30px);
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 15px 30px;
+  min-height: 56px;
+  border-radius: 999px;
+  border: 1px solid var(--line, currentColor);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-weight: 800;
+  font-size: 0.95rem;
+  letter-spacing: 0.16em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 220ms ease, border-color 220ms ease, color 220ms ease, opacity 200ms ease;
+  animation: intro-puls 2.6s ease-in-out 600ms infinite;
+}
+
+.intro-cta:hover {
+  transform: translateX(-50%) scale(1.05);
+  border-color: var(--accent, var(--intro-accent));
+  color: var(--accent, var(--intro-accent));
+}
+
+.intro-cta:active { transform: translateX(-50%) scale(0.97); }
+
+.intro-cta:focus-visible {
+  outline: 3px solid var(--accent, var(--intro-accent));
+  outline-offset: 4px;
+}
+
+@keyframes intro-puls {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.72; }
+}
+
+.intro-cta-undă {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #00efff, #ff36e8);
+  box-shadow: 0 0 14px rgba(255, 54, 232, 0.65), 0 0 8px rgba(0, 239, 255, 0.6);
+}
+
+/* Optiune explicita „Animatie completa” (doar cand sistemul prefera miscare
+   redusa sau exista o preferinta salvata): comutator discret sub legenda. */
+.intro-optiune {
+  position: absolute;
+  left: 50%;
+  top: calc(50% + var(--intro-r) + 100px);
+  transform: translateX(-50%);
+  padding: 10px 18px;
+  min-height: 40px;
+  border-radius: 999px;
+  border: 1px dashed var(--line, currentColor);
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  opacity: 0.75;
+  white-space: nowrap;
+}
+
+.intro-optiune[hidden] { display: none !important; }
+
+.intro-optiune:hover { opacity: 1; }
+
+.intro-optiune:focus-visible {
+  outline: 3px solid var(--accent, var(--intro-accent));
+  outline-offset: 3px;
+}
+
+/* Cât e intro-ul activ, pagina din spate nu derulează. */
+body.intro-activ { overflow: hidden; }
+
+/* Stare de ieșire: legenda dispare rapid, reveal-ul e pe clip-path (din JS). */
+.intro-overlay.intro-iese .intro-cta,
+.intro-overlay.intro-iese .intro-glow,
+.intro-overlay.intro-iese .intro-optiune {
+  opacity: 0;
+  transition: opacity 180ms ease;
+  animation: none;
+}
+
+/* Rezerva DOM (fara WebGL): haloul devine unda care se dilata si se stinge,
+   overlay-ul se estompeaza la final. Durata totala ~1.2s (din JS). */
+.intro-overlay.intro-fallback {
+  animation: intro-aparitie 450ms cubic-bezier(0.16, 1, 0.3, 1) both,
+    intro-stingere-fallback 400ms ease 1900ms both;
+}
+
+.intro-overlay.intro-fallback .intro-glow {
+  animation: intro-undă-fallback 2.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes intro-undă-fallback {
+  0% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  100% { transform: translate(-50%, -50%) scale(7); opacity: 0; }
+}
+
+@keyframes intro-stingere-fallback {
+  to { opacity: 0; }
+}
+
+/* Unda luminoasa DOM din punctul atins (fallback fara WebGL): cerc mare
+   fix + scalare compozitata, vizibil pe orice hardware. */
+.intro-undă-fallback {
+  position: absolute;
+  width: 130vmax;
+  height: 130vmax;
+  border-radius: 50%;
+  border: 4px solid rgba(190, 240, 255, 0.95);
+  box-shadow: 0 0 28px rgba(0, 239, 255, 0.9), 0 0 80px rgba(255, 54, 232, 0.55),
+    inset 0 0 24px rgba(0, 239, 255, 0.5);
+  pointer-events: none;
+  transform: translate(-50%, -50%) scale(0.02);
+  opacity: 1;
+  animation: intro-undă-creste 2.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes intro-undă-creste {
+  0% { transform: translate(-50%, -50%) scale(0.02); opacity: 0.95; }
+  35% { opacity: 0.85; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 0; }
+}
+
+/* Ecrane mici: raza vine din JS; textul rămâne lizibil. */
+@media (max-width: 560px) {
+  .intro-cta {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    padding: 13px 22px;
+    max-width: 92vw;
+    white-space: normal;
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+/* Mișcare redusă: fără pulsații/respirații; tranziție rapidă. */
+@media (prefers-reduced-motion: reduce) {
+  .intro-overlay { animation: none; }
+  .intro-glow { animation: none; }
+  .intro-cta { animation: none; }
+}

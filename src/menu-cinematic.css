@@ -1,0 +1,103 @@
+/* Only the fullscreen menu. The page artwork and header retain their layers. */
+.menu-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-overlay) - 2);
+  pointer-events: none;
+  background: radial-gradient(ellipse at 100% 28%, #e7e3fb75, transparent 54%),
+    radial-gradient(ellipse at 82% 100%, #dfedff65, transparent 46%), var(--bg);
+}
+.menu-backdrop[hidden] { display: none; }
+/* Menu motion preference: accessible without changing the existing layout. */
+.menu-motion-toggle {
+  position: absolute;
+  right: 0;
+  bottom: calc(100% + 2px);
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--ink);
+  cursor: pointer;
+}
+.menu-motion-toggle:hover { border-color: var(--ink); }
+/* End menu motion preference. */
+[data-theme="dark"] .menu-backdrop {
+  background: radial-gradient(ellipse at 100% 34%, #36294f45, transparent 55%),
+    radial-gradient(ellipse at 82% 100%, #1d36563a, transparent 46%), var(--bg);
+}
+[data-menu-scene="active"] #holographic-scene { z-index: calc(var(--z-overlay) - 1); }
+#meniu-overlay.menu-overlay { background: transparent; opacity: 1; transition: none; justify-content: safe flex-end; overscroll-behavior: contain; }
+#meniu-overlay > nav { position: relative; width: max-content; max-width: 100%; }
+#meniu-overlay .menu-list li { overflow: hidden; padding-right: 16px; }
+#meniu-overlay .menu-list a {
+  width: max-content;
+  max-width: 100%;
+  opacity: 0;
+  transform: translate3d(0, 108%, 0);
+  transition: translate 350ms var(--ease-out), color 250ms ease;
+}
+#meniu-overlay .menu-list a:hover { translate: 8px 0; }
+#meniu-overlay .menu-list a:focus-visible { outline-offset: -3px; }
+#meniu-overlay .menu-foot, #meniu-overlay .menu-tema { position: relative; }
+#meniu-overlay > nav, #meniu-overlay .menu-foot, #meniu-overlay .menu-tema, #meniu-overlay .menu-calitate { flex-shrink: 0; }
+@media (prefers-reduced-motion: reduce) {
+  #meniu-overlay .menu-list a { transition: none; }
+  #meniu-overlay .menu-list a:hover { translate: none; }
+}
+/* Control calitate grafica: discret, in limbajul meniului (pastile mici). */
+.menu-calitate {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 14px;
+  margin-top: 18px;
+  font-size: 13px;
+}
+.menu-calitate-eticheta {
+  opacity: 0.65;
+  letter-spacing: 0.08em;
+}
+.menu-calitate-optiuni { display: flex; flex-wrap: wrap; gap: 8px; }
+.menu-calitate-optiuni button {
+  min-height: 36px;
+  padding: 6px 14px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  font-size: 12.5px;
+  cursor: pointer;
+  opacity: 0.7;
+}
+.menu-calitate-optiuni button:hover { opacity: 1; border-color: currentColor; }
+.menu-calitate-optiuni button[aria-pressed="true"] {
+  opacity: 1;
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
+}
+.menu-calitate-optiuni button:focus-visible {
+  outline: 2px solid var(--accent, currentColor);
+  outline-offset: 2px;
+}
+/* Intrare/iesire rapida a optiunilor (decuplata de coregrafia linkurilor):
+   la inchidere dispar in ~120ms (overlay-ul se ascunde abia la finalul
+   coregrafiei ~600ms), fara delay, doar opacity + translate compozitate. */
+#meniu-overlay .menu-calitate {
+  opacity: 1;
+  translate: 0 0;
+  transition: opacity 140ms ease, translate 140ms ease;
+}
+#meniu-overlay:not(.open) .menu-calitate {
+  opacity: 0;
+  translate: 0 8px;
+  transition-duration: 120ms;
+  pointer-events: none;
+}

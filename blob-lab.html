@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ro" data-fundal="deschis">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/blob-lab/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Blob Lab — prototip 3D izolat</title>
+  </head>
+  <body class="lab">
+    <header class="lab-sus">
+      <div>
+        <h1>Blob Lab</h1>
+        <p>Prototip 3D izolat — un singur blob lichid-sticlă. <a href="./index.html">← înapoi la portofoliu</a></p>
+      </div>
+    </header>
+    <main class="lab-scena">
+      <canvas id="scena" aria-label="Previzualizare blob 3D lichid-sticlă"></canvas>
+      <p id="stare" class="lab-stare" role="status" hidden></p>
+    </main>
+    <div class="lab-controale" role="group" aria-label="Controale previzualizare">
+      <button id="btn-tema" type="button" aria-pressed="false">Fundal: deschis</button>
+      <button id="btn-pauza" type="button" aria-pressed="false">Pauză</button>
+      <button id="btn-rotire" type="button" aria-pressed="true">Rotire automată: pornită</button>
+    </div>
+    <script type="module" src="./src/blob-lab/main.js"></script>
+  </body>
+</html>

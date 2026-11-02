@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ro" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <script>
+      try {
+        var t = localStorage.getItem('tema');
+        if (!t && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) t = 'dark';
+        document.documentElement.setAttribute('data-theme', t || 'light');
+      } catch (e) {}
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <meta name="theme-color" content="#FAFAF8" />
+    <title>Intro Bula — Preview izolat</title>
+  </head>
+  <body>
+    <!-- Pagina DEMO din spate: simulează portofoliul dezvăluit de reveal. -->
+    <div id="demo-portofoliu" hidden>
+      <p class="demo-eticheta">PORTOFOLIU (demo din spate)</p>
+      <h1 class="demo-titlu">ȚÎGÎRLAȘ ANDREI.</h1>
+      <p class="demo-sub">Reveal-ul radial a deschis site-ul. Bula a dispărut în fragmente.</p>
+      <div class="demo-actiuni">
+        <button id="demo-replay" type="button">Joacă intro-ul din nou</button>
+        <button id="demo-tema" type="button">Comută tema</button>
+      </div>
+    </div>
+    <script type="module" src="./src/intro/preview.js"></script>
+  </body>
+</html>

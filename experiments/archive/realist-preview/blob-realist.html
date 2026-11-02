@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/blob-realist/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Blob realist — randare 3D ca asset transparent</title>
+  </head>
+  <body class="br">
+    <header class="br-sus">
+      <div>
+        <h1>Blob realist</h1>
+        <p>Randare 3D reală (nu SVG, nu canvas pictat) exportată ca imagine transparentă. <a href="./index.html">← înapoi la portofoliu</a></p>
+      </div>
+    </header>
+    <main class="br-scena">
+      <picture>
+        <source srcset="./assets/realistic-blobs/blob-cycles.webp" type="image/webp" />
+        <img src="./assets/realistic-blobs/blob-cycles.png" alt="Blob lichid-sticlă iridescent randat 3D în Blender Cycles, fundal transparent" width="1024" height="1024" />
+      </picture>
+    </main>
+    <section class="br-detalii" aria-label="Varianta precedentă (Three.js)">
+      <div class="br-mostra" aria-label="Randarea Three.js anterioară">
+        <img src="./assets/realistic-blobs/blob-test.webp" alt="" aria-hidden="true" />
+      </div>
+      <ul>
+        <li><strong>blob-test.png / .webp</strong> — varianta anterioară (Three.js, 2048 × 2048).</li>
+        <li><strong>blob-cycles.png / .webp</strong> — varianta curentă (Blender Cycles, 2048 × 2048).</li>
+      </ul>
+    </section>
+    <section class="br-detalii" aria-label="Detalii asset">
+      <div class="br-mostra" aria-label="Verificare transparență pe tablă de șah">
+        <img src="./assets/realistic-blobs/blob-test.webp" alt="" aria-hidden="true" />
+      </div>
+      <ul>
+        <li><strong>blob-test.png</strong> — 2048 × 2048, canal alpha real</li>
+        <li><strong>blob-test.webp</strong> — 2048 × 2048, calitate 92</li>
+        <li>Moastra din stânga arată transparența pe tablă de șah.</li>
+      </ul>
+    </section>
+    <script type="module" src="./src/blob-realist/main.js"></script>
+  </body>
+</html>

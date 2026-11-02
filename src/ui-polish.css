@@ -1,0 +1,72 @@
+/* Requested typography/contact refinements. Existing artwork and menu styles
+   remain in their original files; no bubble selectors or animation overrides. */
+/* Clear the Romanian comma marks below the first line, not just its line box. */
+.hero-title .line + .line { margin-block-start: clamp(12px, .24em, 66px); }
+.hero-title .punct {
+  /* An inline-block with hidden overflow uses its bottom edge as its baseline.
+     This avoids the internal zero-line-height period lifting the square. */
+  overflow: hidden;
+  vertical-align: -.008em;
+}
+.hero-sub { font-size: clamp(18px, 1.23vw, 24px); line-height: 1.55; }
+.manifest-small, .despre-grid p { font-size: clamp(18px, 1rem + 0.6vw, 20px); line-height: 1.65; }
+.proiect-desc, .faq details p { font-size: 18px; line-height: 1.65; }
+/* Lizibilitate peste bulele decorative: umbra discreta pastreaza contrastul
+   pe tot ciclul animatiei, fara dreptunghiuri solide in spate. */
+.despre-grid p, .manifest-small { text-shadow: 0 1px 14px rgba(2, 2, 25, 0.55); }
+[data-theme="light"] .despre-grid p, [data-theme="light"] .manifest-small {
+  text-shadow: 0 1px 14px rgba(250, 250, 248, 0.9);
+}
+.section-note { font-size: clamp(15px, 1vw, 16px); line-height: 1.6; }
+.footer-grid p { font-size: 13px; line-height: 1.6; }
+.footer-top { font-size: 14px; }
+
+.contact-row { display: flex; flex-wrap: wrap; justify-content: flex-start; align-items: center; gap: 12px; }
+.contact-lista { justify-content: flex-start; align-items: center; gap: 12px; max-width: 100%; }
+.contact-lista li { display: flex; max-width: 100%; }
+.contact-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 11px;
+  min-height: 52px;
+  max-width: 100%;
+  padding: 13px 23px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 92%, transparent);
+  color: var(--ink);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 220ms var(--ease-out), border-color 220ms ease, background-color 220ms ease, box-shadow 220ms ease;
+}
+.contact-pill-primary { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+.contact-icon { display: block; width: 20px; height: 20px; flex: 0 0 20px; }
+.contact-icon-discord { height: 16px; }
+.contact-arrow { margin-left: 3px; font-size: 17px; }
+/* Live copy feedback occupies no space while empty and never shifts the footer. */
+.contact-status { position: absolute; margin: 12px 0 0; font-size: 14px; line-height: 1.6; color: var(--ink); }
+.contact-pill:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.contact-pill:disabled { cursor: default; }
+.contact-pill.copiat .contact-icon-copy { display: none; }
+@media (hover: hover) {
+  .contact-pill:not(:disabled):hover { transform: translateY(-2px); border-color: var(--ink); box-shadow: 0 6px 18px #17133c0a; color: var(--ink); }
+  .contact-pill.contact-pill-primary:hover { background: color-mix(in srgb, var(--ink) 88%, var(--bg)); color: var(--bg); }
+}
+@media (min-width: 1101px) {
+  .hero-sub { font-size: clamp(22px, 1.46vw, 28px); max-width: 530px; }
+}
+@media (max-width: 700px) {
+  .hero-sub { font-size: 18px; }
+  .manifest-small, .despre-grid p { font-size: 17px; line-height: 1.65; }
+  .contact-pill { min-height: 50px; padding: 12px 20px; font-size: 15px; gap: 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .contact-pill { transition: none; }
+  .contact-pill:not(:disabled):hover { transform: none; }
+}
