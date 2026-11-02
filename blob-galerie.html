@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ro" data-fundal="deschis">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/blob-galerie/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Galerie bloburi 3D — 6 forme organice</title>
+  </head>
+  <body class="bgal">
+    <canvas id="panorama" aria-hidden="true"></canvas>
+    <header class="bgal-sus">
+      <div>
+        <h1>Galerie bloburi 3D</h1>
+        <p>Șase geometrii distincte, același material marmorat. <a href="./index.html">← înapoi la portofoliu</a> · <a href="./blob-lab.html">← laboratorul single-blob</a></p>
+      </div>
+      <div class="bgal-controale" role="group" aria-label="Controale galerie">
+        <button id="btn-tema-galerie" type="button" aria-pressed="false">Fundal: deschis</button>
+        <button id="btn-pauza-galerie" type="button" aria-pressed="false">Pauză</button>
+      </div>
+    </header>
+    <main class="bgal-grila" id="grila">
+      <!-- Celulele se generează din FORME (geometrie.js): canvas transparent + etichetă. -->
+    </main>
+    <p id="stare-galerie" class="bgal-stare" role="status" hidden></p>
+    <script type="module" src="./src/blob-galerie/main.js"></script>
+  </body>
+</html>
