@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ro">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,400;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./src/blob-2d-lab/styles.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>Blob 2D Lab — 5 variante izolate</title>
+  </head>
+  <body class="b2d" id="pagina-b2d">
+    <header class="b2d-sus">
+      <div>
+        <h1>Blob 2D Lab</h1>
+        <p>Cinci variante izolate, aceeași referință. <a href="./index.html">← înapoi la portofoliu</a></p>
+      </div>
+      <button id="btn-fundal" type="button" aria-pressed="false">Fundal: deschis</button>
+    </header>
+    <main class="b2d-grila">
+      <section class="b2d-card" aria-labelledby="titlu-a">
+        <div class="b2d-vitrina" id="vitrina-a"></div>
+        <h2 id="titlu-a">Varianta A — SVG stratificat</h2>
+        <p>Gradiente + măști + blur selectiv, 100% vectorial.</p>
+        <button id="descarca-a" type="button">Descarcă PNG</button>
+      </section>
+      <section class="b2d-card" aria-labelledby="titlu-b">
+        <div class="b2d-vitrina" id="vitrina-b"></div>
+        <h2 id="titlu-b">Varianta B — Canvas2D procedural</h2>
+        <p>Marmorat pictat per-pixel (FBM + domain warp), randat o singură dată.</p>
+        <button id="descarca-b" type="button">Descarcă PNG</button>
+      </section>
+      <section class="b2d-card" aria-labelledby="titlu-c">
+        <div class="b2d-vitrina" id="vitrina-c"></div>
+        <h2 id="titlu-c">Varianta C — hibrid canvas + SVG</h2>
+        <p>Textură canvas decupată pe siluetă + luciu vectorial deasupra.</p>
+        <button id="descarca-c" type="button">Descarcă PNG</button>
+      </section>
+      <section class="b2d-card" aria-labelledby="titlu-d">
+        <div class="b2d-vitrina" id="vitrina-d">
+          <img
+            class="b2d-canvas"
+            id="img-d"
+            src="./assets/realistic-blobs/blender-blob.png"
+            alt="Varianta D — blob lichid-sticlă randat 3D în Blender Cycles"
+            width="640"
+            height="640"
+          />
+          <p class="b2d-eroare" id="eroare-d" role="alert" hidden></p>
+        </div>
+        <h2 id="titlu-d">Varianta D — Blender Cycles</h2>
+        <p>Randare 3D realistă, material marmorat iridescent.</p>
+        <button id="descarca-d" type="button">Descarcă PNG</button>
+      </section>
+      <section class="b2d-card" aria-labelledby="titlu-d2">
+        <div class="b2d-vitrina" id="vitrina-d2">
+          <img
+            class="b2d-canvas"
+            id="img-d2"
+            src="./assets/realistic-blobs/blob-d2.png"
+            alt="Varianta D2 — blob lichid-sticlă randat 3D în Blender Cycles, rafinat"
+            width="640"
+            height="640"
+          />
+          <p class="b2d-eroare" id="eroare-d2" role="alert" hidden></p>
+        </div>
+        <h2 id="titlu-d2">Varianta D2 — Blender Cycles Refined</h2>
+        <p>Randare 3D rafinată: formă plină, marmorat bogat, alb luminos.</p>
+        <button id="descarca-d2" type="button">Descarcă PNG</button>
+      </section>
+    </main>
+    <script type="module" src="./src/blob-2d-lab/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+/* Blob 2D Lab — stiluri izolate, prefix .b2d. Nu atinge portofoliul. */
+body.b2d {
+  margin: 0;
+  font-family: "Archivo", system-ui, "Segoe UI", Arial, sans-serif;
+  background: #fafaf8;
+  color: #0a0a0b;
+  -webkit-font-smoothing: antialiased;
+}
+body.b2d a { color: inherit; }
+.b2d-sus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px 8px;
+}
+.b2d-sus h1 {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.b2d-sus p { margin: 4px 0 0; opacity: 0.65; font-size: 0.9rem; }
+.b2d-grila {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 28px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px 24px 64px;
+}
+.b2d-card {
+  border: 1px solid #e3e3e0;
+  border-radius: 24px;
+  padding: 28px 24px;
+  background: rgba(255, 255, 255, 0.6);
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+}
+.b2d-card h2 { margin: 8px 0 0; font-size: 1.05rem; letter-spacing: 0.02em; }
+.b2d-card p { margin: 0; opacity: 0.65; font-size: 0.9rem; max-width: 34ch; }
+.b2d-vitrina {
+  min-height: 320px;
+  display: grid;
+  place-items: center;
+}
+#pagina-b2d.fundal-sah .b2d-vitrina {
+  background-image: conic-gradient(#d8d8d8 0 25%, #ffffff 0 50%, #d8d8d8 0 75%, #ffffff 0);
+  background-size: 28px 28px;
+  border-radius: 18px;
+}
+.b2d-svg, .b2d-canvas { width: 300px; height: auto; display: block; }
+.b2d-card button, .b2d-sus button {
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  min-height: 44px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.b2d-card button:hover, .b2d-sus button:hover { border-color: #2547ff; color: #2547ff; }
+.b2d-eroare {
+  margin: 12px 0 0;
+  padding: 12px 16px;
+  border-radius: 12px;
+  background: #fff1f1;
+  color: #b00020;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.b2d-eroare[hidden] { display: none; }

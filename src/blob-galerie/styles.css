@@ -1,0 +1,108 @@
+/* Galerie bloburi 3D — stiluri izolate, prefix .bgal. Nu atinge portofoliul. */
+body.bgal {
+  margin: 0;
+  font-family: "Archivo", system-ui, "Segoe UI", Arial, sans-serif;
+  background: #fafaf8;
+  color: #0a0a0b;
+  -webkit-font-smoothing: antialiased;
+}
+body.bgal a { color: inherit; }
+html[data-fundal="intunecat"] body.bgal {
+  background: #06070c;
+  color: #f4f4f1;
+}
+#panorama {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+.bgal-sus {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 32px 24px 0;
+}
+.bgal-sus h1 {
+  margin: 0;
+  font-size: 1rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.bgal-sus p { margin: 4px 0 0; opacity: 0.65; font-size: 0.9rem; }
+.bgal-controale { display: flex; gap: 10px; flex-wrap: wrap; }
+.bgal-grila {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px 24px 72px;
+  box-sizing: border-box;
+}
+.bgal-celula {
+  border: 1px solid currentColor;
+  border-radius: 24px;
+  overflow: clip;
+  min-height: 300px;
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+.bgal-scena {
+  min-height: 260px;
+}
+/* Sistem de mărimi: geometria e normalizată, cardul dictează scara. */
+.bgal-celula.mare .bgal-scena { min-height: 340px; }
+.bgal-celula.mic .bgal-scena { min-height: 220px; }
+.bgal-compus { grid-column: 1 / -1; }
+.bgal-compus .bgal-scena { min-height: 380px; }
+.bgal-eticheta { padding: 14px 20px 20px; }
+.bgal-eticheta h2 { margin: 0; font-size: 1rem; }
+.bgal-eticheta p { margin: 4px 0 0; opacity: 0.65; font-size: 0.85rem; }
+.bgal-stare {
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  max-width: 34ch;
+  text-align: center;
+  border: 1px solid currentColor;
+  border-radius: 12px;
+  padding: 16px 20px;
+  background: inherit;
+}
+.bgal-stare[hidden] { display: none; }
+.bgal-controale button {
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.85rem;
+  min-height: 44px;
+  padding: 10px 22px;
+  border-radius: 999px;
+  border: 1px solid currentColor;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+.bgal-controale button:hover { border-color: #2547ff; color: #2547ff; }
+@media (max-width: 900px) {
+  .bgal-grila { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .bgal-grila { grid-template-columns: 1fr; }
+  .bgal-sus { flex-direction: column; align-items: flex-start; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bgal-controale button { transition: none; }
+}
